@@ -35,8 +35,8 @@ local = ["transformers>=4.44", "torch>=2.2", "accelerate>=0.33", "peft>=0.12"]
 dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.10"]
 
 [project.urls]
-Homepage = "https://github.com/danielregaladocardoso/chartmind"
-Issues = "https://github.com/danielregaladocardoso/chartmind/issues"
+Homepage = "https://github.com/DanielRegaladoUMiami/chartmind"
+Issues = "https://github.com/DanielRegaladoUMiami/chartmind/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["chartmind"]
