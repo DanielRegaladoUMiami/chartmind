@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chartmind"
+version = "0.0.1"
+description = "Natural language → SQL → chart spec → SVG. A composable pipeline for conversational data visualization."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Daniel Regalado", email = "dxr1491@miami.edu" }]
+keywords = ["llm", "text-to-sql", "data-visualization", "svg", "bi", "nl2sql"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Database",
+]
+dependencies = [
+    "pydantic>=2.6",
+    "sqlalchemy>=2.0",
+    "sqlglot>=23.0",
+    "lxml>=5.0",
+    "huggingface-hub>=0.24",
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.1"]
+local = ["transformers>=4.44", "torch>=2.2", "accelerate>=0.33", "peft>=0.12"]
+dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.10"]
+
+[project.urls]
+Homepage = "https://github.com/danielregaladocardoso/chartmind"
+Issues = "https://github.com/danielregaladocardoso/chartmind/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["chartmind"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
