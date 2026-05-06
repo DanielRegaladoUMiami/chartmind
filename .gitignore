@@ -28,4 +28,5 @@ coverage.xml
 *.sqlite
 *.sqlite3
 *.db
+!tests/fixtures/*.sqlite
 .cache/
