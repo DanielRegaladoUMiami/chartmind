@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 
-from huggingface_hub import InferenceClient
+from huggingface_hub import InferenceClient, get_token
 
 from chartmind.backends.base import InferenceBackend
 
@@ -10,8 +10,11 @@ from chartmind.backends.base import InferenceBackend
 class HFInferenceBackend(InferenceBackend):
     """Calls the Hugging Face Inference API.
 
-    Reads token from `HF_TOKEN` env var (or `HUGGING_FACE_HUB_TOKEN` fallback)
-    unless one is passed explicitly.
+    Token resolution order:
+        1. explicit `token=...` arg
+        2. `HF_TOKEN` env var
+        3. `HUGGING_FACE_HUB_TOKEN` env var
+        4. token cached by `hf auth login` (~/.cache/huggingface/token)
     """
 
     def __init__(self, token: str | None = None, timeout: float = 120.0):
@@ -19,11 +22,13 @@ class HFInferenceBackend(InferenceBackend):
             token
             or os.getenv("HF_TOKEN")
             or os.getenv("HUGGING_FACE_HUB_TOKEN")
+            or get_token()
         )
         if not resolved:
             raise RuntimeError(
-                "No Hugging Face token found. Set HF_TOKEN in your environment "
-                "or pass token=... explicitly. Get one at https://hf.co/settings/tokens"
+                "No Hugging Face token found. Set HF_TOKEN in your environment, "
+                "run `hf auth login`, or pass token=... explicitly. "
+                "Get one at https://hf.co/settings/tokens"
             )
         self._token = resolved
         self._timeout = timeout

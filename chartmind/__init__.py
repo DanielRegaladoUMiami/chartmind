@@ -1,3 +1,4 @@
+from chartmind.client import Client
 from chartmind.models import (
     ChartSpec,
     ColumnSchema,
@@ -11,6 +12,7 @@ from chartmind.models import (
 __version__ = "0.0.1"
 __all__ = [
     "ChartSpec",
+    "Client",
     "ColumnSchema",
     "QueryResult",
     "Result",

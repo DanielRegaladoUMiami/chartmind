@@ -27,6 +27,7 @@ dependencies = [
     "lxml>=5.0",
     "huggingface-hub>=0.24",
     "pandas>=2.0",
+    "matplotlib>=3.7",
 ]
 
 [project.optional-dependencies]
